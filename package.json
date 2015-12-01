@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "scripts": {
     "start": "node ./bin/www",
-    "postinstall": "npm run build-js && npm run build-css",
     "build-css": "cat client/css/style.css client/css/theme.css | cleancss -o client/bundle.min.css",
     "build-js": "browserify client/app.js -t stringify -t [ babelify --presets [ es2015 ] ] | uglifyjs -o client/bundle.min.js"
   },
