@@ -40,8 +40,8 @@ body {
 .m-v-10 {
     margin: 10px 0;
 }
-.m-0 {
-    margin: 0;
+.w-90 {
+    width: 90%;
 }
 .m-0-3 {
     margin: 0 3px;
@@ -71,6 +71,10 @@ body {
     margin: 10px;
     background-color: rgb(224, 231, 234);
     border-radius: 10px;
+}
+#messages > b {
+    display: block;
+    overflow: hidden;
 }
 #toast-container > div {
     box-shadow: none;

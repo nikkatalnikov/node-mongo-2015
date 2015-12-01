@@ -1,17 +1,15 @@
-<div class="centered m-0">
-    <form class="form-horizontal centered">
-        <div class="control-group">
-            <label>
-                <h4>Let's Chat, <%= user %>!</h4>
-            </label>
-            <div class="controls">
-                <input id="chat" type="text" name="msg" class="form-control" required>
-            </div>
-            <hr class="custom-hr">
+<form class="form-horizontal centered">
+    <div class="control-group w-90">
+        <label>
+            <h4>Let's Chat, <%= user %>!</h4>
+        </label>
+        <div class="controls">
+            <input id="chat" type="text" name="msg" class="form-control" required>
         </div>
-        <div class="control-group">
-            <button type="submit" class="btn btn-primary"><i></i>Send Message</button>
-        </div>
-    </form>
-    <div id="messages"></div>
-</div>
+        <hr class="custom-hr">
+    </div>
+    <div class="control-group">
+        <button type="submit" class="btn btn-success"><i></i>Send Message</button>
+    </div>
+    <div id="messages" class="w-90"></div>
+</form>
