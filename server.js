@@ -21,7 +21,15 @@ var app = express();
 var io = socketio();
 app.io = io;
 
-mongoose.connect('mongodb://localhost/test');
+var uristring =  process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/test';
+mongoose.connect(uristring, function (err) {
+    if (err) {
+        console.log ('ERROR connecting to: ' + uristring + '. ' + err);
+    } else {
+        console.log ('Succeeded connected to: ' + uristring);
+    }
+});
+
 mongoose.Promise = require('bluebird');
 
 app.use(bodyParser.json());

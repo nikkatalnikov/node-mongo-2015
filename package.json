@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "start": "node ./bin/www",
+    "postinstall": "npm run build-js && npm run build-css",
     "build-css": "cat client/css/style.css client/css/theme.css | cleancss -o client/bundle.min.css",
     "build-js": "browserify client/app.js -t stringify -t [ babelify --presets [ es2015 ] ] | uglifyjs -o client/bundle.min.js"
   },
@@ -19,9 +20,7 @@
     "mongoose": "^4.2.6",
     "socket.io": "^1.3.7",
     "socket.io-client": "^1.3.7",
-    "toastr": "^2.1.2"
-  },
-  "devDependencies": {
+    "toastr": "^2.1.2",
     "babel-preset-es2015": "^6.1.18",
     "babelify": "^7.2.0",
     "browserify": "^12.0.1",
