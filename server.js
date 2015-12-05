@@ -68,7 +68,7 @@ io.on('connection', function(client){
 
 });
 
-app.use(function (err, req, res) {
+app.use(function (err, req, res, next) {
     if (err.name === 'UnauthorizedError') {
         if (req.url === '/chat') {
             res.sendStatus(401);
