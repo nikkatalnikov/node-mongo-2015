@@ -1,16 +1,14 @@
+/*eslint-env commonjs*/
 "use strict";
 
-const Backbone = require('backbone');
-const template = require('./partials/home.html');
+var Backbone = require('backbone');
+var template = require('./partials/home.html');
 
-class HomeView extends Backbone.View {
-    constructor() {
-        super();
-    }
-    render (){
+var HomeView = Backbone.View.extend({
+    render: function() {
         this.$el.html(template);
         return this;
     }
-}
+});
 
 module.exports = HomeView;

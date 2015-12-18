@@ -1,19 +1,19 @@
+/*eslint-env commonjs*/
 "use strict";
 
-const Backbone = require('backbone');
-const template = require('./partials/chat.html');
-const _ = require('lodash');
+var Backbone = require('backbone');
+var template = require('./partials/chat.html');
+var _ = require('lodash');
 
-class ChatView extends Backbone.View {
-    constructor(options) {
-        super();
+var ChatView = Backbone.View.extend ({
+    initialize: function(options) {
         this.template = _.template(template);
         this.user = options.user;
-    }
-    render() {
+    },
+    render: function() {
         this.$el.html(this.template({user: this.user}));
         return this;
     }
-}
+});
 
 module.exports = ChatView;

@@ -1,24 +1,28 @@
+/*eslint-env commonjs, browser*/
+/*eslint no-console: 0*/
 "use strict";
 
-const $ = require('jquery');
-const UIController = require('./UIController');
+var $ = require('jquery');
+var inherit = require('inherit');
+var UIController = require('./UIController');
 
-class LogoutController extends UIController {
-    constructor(options) {
-        super(options);
-    }
-    run () {
+var LogoutController = inherit(UIController, {
+    __constructor: function(options) {
+        UIController.prototype.__constructor.call(this, options);
+    },
+    run: function() {
+        var self = this;
         Promise
             .resolve($.post('/logout'))
-            .then(() => {
+            .then(function() {
                 localStorage.removeItem('chatToken');
-                this.onSuccess('/');
+                self.onSuccess('/');
             })
-            .catch(() => {
+            .catch(function() {
                 localStorage.removeItem('chatToken');
-                this.onError('/login');
+                self.onError('/login');
             });
     }
-}
+});
 
 module.exports = LogoutController;

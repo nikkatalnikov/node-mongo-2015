@@ -1,3 +1,6 @@
+/*eslint-env node, commonjs */
+/*eslint no-console: 0*/
+
 "use strict";
 
 var express = require('express');
@@ -21,12 +24,12 @@ var app = express();
 var io = socketio();
 app.io = io;
 
-var uristring =  process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/test';
-mongoose.connect(uristring, function (err) {
+var uriString =  process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/test';
+mongoose.connect(uriString, function (err) {
     if (err) {
-        console.log ('ERROR connecting to: ' + uristring + '. ' + err);
+        console.log ('ERROR connecting to: ' + uriString + '. ' + err);
     } else {
-        console.log ('Succeeded connected to: ' + uristring);
+        console.log ('Succeeded connected to: ' + uriString);
     }
 });
 
@@ -76,6 +79,7 @@ app.use(function (err, req, res, next) {
             res.redirect('/');
         }
     }
+    next();
 });
 
 module.exports = app;

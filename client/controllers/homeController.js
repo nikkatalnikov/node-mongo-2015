@@ -1,16 +1,18 @@
+/*eslint-env commonjs*/
 "use strict";
 
-const HomeView = require('../views/homeView');
-const UIController = require('./UIController');
+var HomeView = require('../views/homeView');
+var UIController = require('./UIController');
+var inherit = require('inherit');
 
-class HomeController extends UIController {
-    constructor(options) {
-        super(options);
+var HomeController = inherit(UIController, {
+    __constructor: function(options) {
+        UIController.prototype.__constructor.call(this, options);
         this.view = new HomeView();
-    }
-    run () {
+    },
+    run: function () {
         this.switchSection(this.view);
     }
-}
+});
 
 module.exports = HomeController;

@@ -1,16 +1,14 @@
+/*eslint-env commonjs*/
 "use strict";
 
-const Backbone = require('backbone');
-const template = require('./partials/login.html');
+var Backbone = require('backbone');
+var template = require('./partials/login.html');
 
-class LoginView extends Backbone.View {
-    constructor() {
-        super();
-    }
-    render (){
+var LoginView = Backbone.View.extend({
+    render: function() {
         this.$el.html(template);
         return this;
     }
-}
+});
 
 module.exports = LoginView;

@@ -1,12 +1,11 @@
+/*eslint-env commonjs*/
 "use strict";
 
-const Backbone = require('backbone');
+var Backbone = require('backbone');
+var CHAT_URL = '/chat';
 
-class UserModel extends Backbone.Model {
-    constructor() {
-        super();
-        this.url = '/chat';
-    }
-}
+var UserModel = Backbone.Model.extend({
+    url: CHAT_URL
+});
 
 module.exports = UserModel;

@@ -1,52 +1,56 @@
+/*eslint-env commonjs, browser*/
+/*eslint no-console: 0*/
 "use strict";
 
-const _ = require('lodash');
-const io = require('socket.io-client');
-const $ = require('jquery');
-const UserModel = require('../models/UserModel');
-const ChatView = require('../views/chatView');
-const UIController = require('./UIController');
+var _ = require('lodash');
+var inherit = require('inherit');
+var io = require('socket.io-client');
+var $ = require('jquery');
+var UserModel = require('../models/UserModel');
+var ChatView = require('../views/chatView');
+var UIController = require('./UIController');
 
-class ChatController extends UIController {
-    constructor(options) {
-        super(options);
+var ChatController = inherit(UIController, {
+    __constructor: function(options) {
+        UIController.prototype.__constructor.call(this, options);
         this.model = new UserModel();
-    }
-    run () {
-        let modelPromise = this.fetchModel(this.model);
-            modelPromise.then(() => {
-                let user = this.model.get('user');
-                let view = new ChatView({user});
-                this.switchSection(view);
+    },
+    run: function() {
+        var self = this;
+        var modelPromise = this.fetchModel(this.model);
+            modelPromise.then(function() {
+                var user = self.model.get('user');
+                var view = new ChatView({user: user});
+                self.switchSection(view);
 
-                let socket = io();
+                var socket = io();
                 socket.emit('join', user);
 
-                let $chat = $('#chat');
-                let $messages =  $('#messages');
-                let form = $('form');
+                var $chat = $('#chat');
+                var $messages =  $('#messages');
+                var form = $('form');
 
-                form.submit(() => {
-                    let text =  $chat.val();
-                    socket.emit('send', text);
+                form.submit(function() {
+                    socket.emit('send', $chat.val());
                     $chat.val('');
                     return false;
                 });
 
-                socket.on('chat',(info, text) => {
+                socket.on('chat', function(info, text) {
                     $messages
                         .append($('<div>').text(info))
                         .append($('<b>').text(text));
                 });
 
-                socket.on('update', (info) => {
+                socket.on('update', function(info) {
                     $messages
                         .append($('<div>').text(info));
                 });
             })
-            .catch(() => this.onError('/login', _.noop));
+            .catch(function() {
+                self.onError('/login', _.noop);
+            });
     }
-
-}
+});
 
 module.exports = ChatController;

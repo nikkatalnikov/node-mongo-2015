@@ -1,3 +1,4 @@
+/*eslint-env node*/
 "use strict";
 
 var express = require('express');
@@ -15,7 +16,7 @@ router.post('/', function(req, res) {
                 token: token
             });
 
-        }).catch(function(err){
+        }).catch(function() {
             res.sendStatus(400);
         });
 });

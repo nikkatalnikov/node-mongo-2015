@@ -1,32 +1,35 @@
+/*eslint-env commonjs, browser*/
+/*eslint no-console: 0*/
 "use strict";
 
-const _ = require('lodash');
-const $ = require('jquery');
-const toastr = require('toastr');
-const SignUpView = require('../views/signupView');
-const UIController = require('./UIController');
+var inherit = require('inherit');
+var $ = require('jquery');
+var toastr = require('toastr');
+var SignUpView = require('../views/signupView');
+var UIController = require('./UIController');
 
-class SignUpController extends UIController {
-    constructor(options) {
-        super(options);
+var SignUpController = inherit(UIController, {
+    __constructor: function(options) {
+        UIController.prototype.__constructor.call(this, options);
         this.view = new SignUpView();
-    }
-    run () {
+    },
+    run: function () {
         this.switchSection(this.view);
-        let form = $('form');
-        form.submit(() => {
+        var self = this;
+        var form = $('form');
+        form.submit(function() {
             Promise
                 .resolve($.post("/signup", form.serialize()))
-                .then((result) => {
+                .then(function(result) {
                     localStorage.setItem('chatToken', result.token);
-                    this.onSuccess('/chat');
+                    self.onSuccess('/chat');
                 })
-                .catch(() => {
+                .catch(function() {
                     toastr.error("User already exists");
-                    this.onError('/signup');
+                    self.onError('/signup');
                 });
         });
     }
-}
+});
 
 module.exports = SignUpController;

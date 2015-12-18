@@ -1,63 +1,69 @@
+/*eslint-env commonjs*/
 "use strict";
 
-const Backbone = require('backbone');
-const $ = require('jquery');
-const LoginController = require('./controllers/loginController');
-const HomeController = require('./controllers/homeController');
-const SignUpController = require('./controllers/signUpController');
-const LogoutController = require('./controllers/logoutController');
-const ChatController = require('./controllers/chatController');
+var Backbone = require('backbone');
+var $ = require('jquery');
+var LoginController = require('./controllers/loginController');
+var HomeController = require('./controllers/homeController');
+var SignUpController = require('./controllers/signUpController');
+var LogoutController = require('./controllers/logoutController');
+var ChatController = require('./controllers/chatController');
 
-class Router extends Backbone.Router {
-    constructor () {
-        super();
-    }
-    run () {
-        this.routes = {
-            '': 'index',
-            'login': 'login',
-            'logout': 'logout',
-            'signup': 'signup',
-            'chat': 'chat'
-        };
+var Router = Backbone.Router.extend({
+    routes: {
+        '': 'index',
+        'login': 'login',
+        'logout': 'logout',
+        'signup': 'signup',
+        'chat': 'chat'
+    },
+
+    initialize: function() {
         this.container = $('#container');
-        this._bindRoutes();
-    }
-    index (){
-        let contoller = new HomeController({
+    },
+
+    run: function() {
+        Backbone.history.start();
+    },
+
+    index: function() {
+        var controller = new HomeController({
             router: this,
             container: this.container
         });
-        contoller.run();
-    }
-    login () {
-        let contoller = new LoginController({
+        controller.run();
+    },
+    login: function() {
+        var controller = new LoginController({
             router: this,
             container: this.container
         });
-        contoller.run();
-    }
-    signup () {
-        let contoller = new SignUpController({
+        controller.run();
+    },
+
+    signup: function() {
+        var controller = new SignUpController({
             router: this,
             container: this.container
         });
-        contoller.run();
-    }
-    logout () {
-        let contoller = new LogoutController({
+        controller.run();
+    },
+
+    logout: function () {
+        var controller = new LogoutController({
             router: this,
             container: this.container
         });
-        contoller.run();
-    }
-    chat () {
-        let contoller = new ChatController({
+        controller.run();
+    },
+
+    chat: function () {
+        var controller = new ChatController({
             router: this,
             container: this.container
         });
-        contoller.run();
+        controller.run();
     }
-}
+});
 
 module.exports = Router;
