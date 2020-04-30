@@ -16,7 +16,7 @@
     "express": "~4.13.1",
     "express-jwt": "^3.3.0",
     "inherit": "^2.2.2",
-    "jquery": "^2.1.4",
+    "jquery": "^3.5.0",
     "jsonwebtoken": "^5.4.1",
     "lodash": "^3.8.0",
     "moment": "^2.10.6",
